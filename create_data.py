@@ -12,24 +12,41 @@ import re
 # first_upload_date
 # update_date, 
 
+pretty_fields = ["id", "submitter", "authors_parsed", "title", "comments", "journal_ref", "doi", "abstract", "categories"]
+fields = ["id", "submitter", "authors_parsed", "title", "comments", "journal-ref", "doi", "abstract", "categories"]
 with open("/mnt/c/Users/Joshua Engels/Downloads/arxiv-metadata-oai-snapshot.json", "r") as input, open("output.csv", "w") as output:
+        count = 0
+        output.write(",".join(pretty_fields) + "\n")
         while True:
                 line = input.readline()
                 if (line == "" ):
                         break
                 parsed = json.loads(line)
                 if parsed["categories"].startswith("cs"):
-                        fields = ["id", "submitter", "authors", "title", "comments", "journal-ref", "abstract", "categories"]
                         results = []
                         for field in fields:
                                 so_far = parsed[field]
                                 if so_far == None:
-                                        results.append("")
+                                        so_far = ""
                                 else:
+                                        if field == "authors_parsed":
+                                                so_far = ":".join([" ".join(name[:2] + name[3:]) for name in so_far])
+                                        so_far = re.sub("\\r\\n[.!?\\-]", "", so_far)
+                                        so_far = re.sub("\\r", " ", so_far)
                                         so_far = re.sub("\\n[.!?\\-]", "", so_far)
                                         so_far = re.sub("\\n", " ", so_far)
+                                        so_far = re.sub("\\r[.!?\\-]", "", so_far)
+                                        so_far = re.sub("\\r", " ", so_far)
+                                        so_far = re.sub("\\r", " ", so_far)
+                                        so_far = re.sub("\"", "'", so_far)
+
+                                        
                                         so_far = re.sub(' +',' ',so_far)
                                         so_far = so_far.strip()
                                         so_far = "\"" + so_far + "\""
-                                        results.append(so_far)
+                                results.append(so_far)
+
+                        count += 1
+                        if (count % 1000 == 0):
+                                print(count)
                         output.write(",".join(results) + "\n")
