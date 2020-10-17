@@ -13,8 +13,9 @@ def fill_in_later(file_name):
         refs = json.loads(result.stdout)
         ref_ids = []
         ref_title_list = [x['title'][0] for x in refs if 'title' in x]
-                for ret_title in ref_title_list
-                        ref_ids.append(str(df.loc[df.title == title_name].id.values.item())) 
+        for ret_title in ref_title_list
+                ref_ids.append(str(df.loc[df.title == title_name].id.values.item())) 
+        return ref_ids
 
 # ids = []
 # with open('output.csv', newline='') as base_data:
