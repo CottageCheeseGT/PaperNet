@@ -30,7 +30,6 @@ class PaperNetApp:
         result = tx.run(query)
         return result
 
-
         #  first_upload_date: $first_upload_date, update_date: $update_date })
 
 
@@ -105,23 +104,6 @@ class PaperNetApp:
     #     result = tx.run(query, paper_name=paper_name)
     #     return [record["name"] for record in result]
         
-    
-
-
-    
-
-    # def print_greeting(self, message):
-    #     with self.driver.session() as session:
-    #         greeting = session.write_transaction(self._create_and_return_greeting, message)
-    #         print(greeting)
-
-    # @staticmethod
-    # def _create_and_return_greeting(tx, message):
-    #     result = tx.run("CREATE (a:Greeting) "
-    #                     "SET a.message = $message "
-    #                     "RETURN a.message + ', from node ' + id(a)", message=message)
-    #     return result.single()[0]
-
 
 
 paper = PaperNetApp("neo4j://104.198.183.32", "neo4j", "tSgiHA1DN9R98PeM")
