@@ -1,10 +1,20 @@
 import os
 import subprocess
 import csv
+import pandas as pd
+import json
 
+
+TOTAL_ROWS = 250000
+df = pd.read_csv('output.csv',nrows=TOTAL_ROWS,low_memory=False)
 
 def fill_in_later(file_name):
-        return ["test1", "test2"]
+        result = subprocess.run(['anystyle', 'find', file_name], stdout=subprocess.PIPE)
+        refs = json.loads(result.stdout)
+        ref_ids = []
+        ref_title_list = [x['title'][0] for x in refs if 'title' in x]
+                for ret_title in ref_title_list
+                        ref_ids.append(str(df.loc[df.title == title_name].id.values.item())) 
 
 # ids = []
 # with open('output.csv', newline='') as base_data:
@@ -12,6 +22,8 @@ def fill_in_later(file_name):
 #         for line in base_data_reader:
 #                 if line[0] != "id":
 #                         ids.append(line[0])
+
+
 
 batch_size = 10
 result = subprocess.run(['wc', '-l', 'ids'], stdout=subprocess.PIPE)
