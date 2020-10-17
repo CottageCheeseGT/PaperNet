@@ -9,29 +9,82 @@
 		<title>Paper Net: Visualizing Research</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		 <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<!-- Styles -->
 		<link rel="stylesheet" href="Web/assets/css/main.css" />
 		<link rel="stylesheet" href="Web/assets/css/dataviz.css" />
 		<noscript><link rel="stylesheet" href="Web/assets/css/noscript.css" /></noscript>
 
-		 <!-- Styles -->
-		 <!-- <link href = "style.css" type = "text/css" rel = "stylesheet"> -->
-		 
 		 <!-- Scripts -->
 		 <script type="text/javascript" src="Web/script.js"></script>
 		 <script src="https://cdn.neo4jlabs.com/neovis.js/v1.4.0/neovis.js"></script>
 	</head>
-	<body onload="draw()" class="is-preload">
+	<!-- onload="draw()" -->
+	<body class="is-preload">
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<h1> Papernet: Visualizing Research</h1>
 				<div id="viz"></div>
+				<br />	<br />
+
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6 col-md-6">
+							<section id = "main">
+								<span class="avatar"><img src="Web/images/avatar.jpg" alt="" /></span>
+								<h1 style = "color:#313f47">Most Influential Papers</h1>
+								<p>Between 1966 and 1983</p>
+							</section>
+						</div>
+
+						<div class="col-sm-6 col-md-6">
+							<section id = "main">
+								<span class="avatar"><img src="Web/images/avatar.jpg" alt="" /></span>
+								<h1 style = "color:#313f47">Leading Authors</h1>
+								<p>Between 1966 and 1983</p>
+							</section>
+						</div>
+					</div>
+				</div>
+
+				<br />	<br />
+
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6 col-md-6">
+							<section id = "main">
+								<span class="avatar"><img src="Web/images/avatar.jpg" alt="" /></span>
+								<h1 style = "color:#313f47">Top Journals</h1>
+								<p>Between 1966 and 1983</p>
+							</section>
+						</div>
+
+						<div class="col-sm-6 col-md-6">
+							<section id = "main">
+								<span class="avatar"><img src="Web/images/avatar.jpg" alt="" /></span>
+								<h1 style = "color:#313f47">Trending Categories</h1>
+								<p>Between 1966 and 1983</p>
+							</section>
+						</div>
+					</div>
+				</div>
+
+
+
 				<!-- Main -->
 					<!-- <section id="main"> -->
+
 						<!-- <header> -->
-						
-							<!-- <span class="avatar"><img src="images/avatar.jpg" alt="" /></span>
-							<h1>Jane Doe</h1>
-							<p>Senior Psychonautics Engineer</p> -->
+							<!-- <span class="avatar"><img src="Web/images/avatar.jpg" alt="" /></span>
+							<h1 style = "color:#313f47">Most Influential Papers</h1>
+							<p>Senior Psychonautics Engineer</p>	 -->
 						<!-- </header> -->
 						<!--
 						<hr />
@@ -82,9 +135,10 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="copyright">
-							<li>&copy; Your boi</li><li>Design: <a href="http://html5up.net">your boi</a></li>
+							<li>&copy; Kartik Sarangmath, Josh Engels, Ishaan Sehgal</li>
+							<!-- <li>Design: <a href="http://html5up.net">your boi</a></li> -->
 						</ul>
-					</footer>
+					</footer>	
 
 			</div>
 
