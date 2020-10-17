@@ -75,11 +75,11 @@ class PaperNetApp:
 			# Write transactions allow the driver to handle retries and transient errors
 			with open("test_output.txt") as file:
 				for line in file:
-					paper = line[:8]
+					paper = line[:line.find(':') - 6]
 					cited_papers = line[line.find('[')+1:-1]
 					cited_papers = cited_papers.replace("\'", "")
 					print(paper, cited_papers)
-					result = session.write_transaction(self._create_and_return_citation, paper, cited_papers)
+					# result = session.write_transaction(self._create_and_return_citation, paper, cited_papers)
 
 	@staticmethod
 	def _create_and_return_citation(tx, paper, papers_cited):
