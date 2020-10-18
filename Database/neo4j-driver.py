@@ -73,13 +73,19 @@ class PaperNetApp:
 	def create_paper_citation(self):
 		with self.driver.session() as session:
 			# Write transactions allow the driver to handle retries and transient errors
-			with open("test_output.txt") as file:
+			with open("edges2") as file:
 				for line in file:
-					paper = line[:line.find(':') - 6]
-					cited_papers = line[line.find('[')+1:-1]
+					colon_idx = line.find(':')
+					paper = line[:colon_idx - 6]
+				
+					if line[colon_idx + 2: colon_idx + 4] == "[]":
+						continue
+
+					cited_papers = line[colon_idx+3:-2]
 					cited_papers = cited_papers.replace("\'", "")
+						
 					print(paper, cited_papers)
-					# result = session.write_transaction(self._create_and_return_citation, paper, cited_papers)
+					result = session.write_transaction(self._create_and_return_citation, paper, cited_papers)
 
 	@staticmethod
 	def _create_and_return_citation(tx, paper, papers_cited):
@@ -87,8 +93,9 @@ class PaperNetApp:
 		query = (
 			'''
 			WITH $papers_cited as y
-			UNWIND split(y, ',') AS x
-			MERGE (p {id: $paper})-[:CITED]->(m {id: x})
+			UNWIND split(y, ', ') AS x
+			MATCH (a:Paper {id: $paper}), (b:Paper {id:x})
+			CREATE (a)-[:CITED]->(b)
 			'''
 		)
 		result = tx.run(query, paper=paper, papers_cited=papers_cited)
