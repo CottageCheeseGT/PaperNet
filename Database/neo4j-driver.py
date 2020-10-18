@@ -17,28 +17,28 @@ class PaperNetApp:
 			return result
 
 	@staticmethod
-	def _populate_papers(tx, index):
+	    def _populate_papers(tx, index):
 		# for i in range(index,index+5000,1000):
 		query = (
-			'''
-			LOAD CSV WITH HEADERS FROM "https://www.dropbox.com/s/q1vjcik6dayqezx/output.csv?dl=1" AS row
-			WITH row SKIP $i LIMIT 1000
-			MERGE (p:Paper { title: row.title, id: row.id,submitter: row.submitter, \
-				comments: coalesce(row.comments, "Unknown"), \
-				doi: coalesce(row.doi, "Unknown")})
-			WITH p, row
-			UNWIND split(coalesce(row.categories, "Unknown"), ' ') AS category
-			MERGE (c:Category {name: category})
-			MERGE (c)-[r:CONTAINS]->(p)
-			WITH p, row
-			MERGE (j:Journal {name:coalesce(row.journal_ref, "Unknown")})
-			MERGE (j)-[pub:PUBLISHED_IN]->(p)
-			WITH p, row
-			UNWIND split(row.authors_parsed, ':') AS author
-			MERGE (a:Author {name: author})
-			MERGE (a)<-[w:WRITTEN]->(p)
-			''')
-		# print(i)
+		    '''
+		    LOAD CSV WITH HEADERS FROM "https://www.dropbox.com/s/bzevrkg5yfspf7h/output.csv?dl=1" AS row
+		    WITH row SKIP $i LIMIT 1000
+		    MERGE (p:Paper { title: row.title, id: row.id,submitter: row.submitter, \
+			comments: coalesce(row.comments, "Unknown"), \
+			doi: coalesce(row.doi, "Unknown"), versions:row.versions})
+		    WITH p, row
+		    UNWIND split(coalesce(row.categories, "Unknown"), ' ') AS category
+		    MERGE (c:Category {name: category})
+		    MERGE (c)-[r:CONTAINS]->(p)
+		    WITH p, row
+		    MERGE (j:Journal {name:coalesce(row.journal_ref, "Unknown")})
+		    MERGE (j)-[pub:PUBLISHED_IN]->(p)
+		    WITH p, row
+		    UNWIND split(row.authors_parsed, ':') AS author
+		    MERGE (a:Author {name: author})
+		    MERGE (a)<-[w:WRITTEN]->(p)
+		    ''')
+		print(i)
 		result = tx.run(query, i=index)
 		return result
 
